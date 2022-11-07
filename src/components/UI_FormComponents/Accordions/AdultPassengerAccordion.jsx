@@ -9,7 +9,14 @@ import { Container, TextField } from "@material-ui/core";
 function AdultPassengerDetailAccordion({ title, subtitle, register, index }) {
   return (
     <div>
-      <Accordion style={{ backgroundColor: '#424242', borderRadius: '10px', borderColor: 'error.main', margin: "10px 0px" }}>
+      <Accordion
+        style={{
+          backgroundColor: "#424242",
+          borderRadius: "10px",
+          borderColor: "error.main",
+          margin: "10px 0px",
+        }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -19,6 +26,7 @@ function AdultPassengerDetailAccordion({ title, subtitle, register, index }) {
         </AccordionSummary>
         <AccordionDetails style={{ color: "white" }}>
           <Typography color="darkgrey">{subtitle}</Typography>
+
           <Container style={{ marginTop: "20px", paddingLeft: "0px" }}>
             <TextField
               {...register(`adults.${index}.surName`)}

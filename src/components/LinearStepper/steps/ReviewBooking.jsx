@@ -1,9 +1,27 @@
-import { Grid, TextField, Typography } from "@material-ui/core";
-import { Controller, useFormContext } from "react-hook-form";
-import React from "react";
+import { Typography } from "@material-ui/core";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 
 const ReviewBooking = () => {
-  const { control, register } = useFormContext();
+  const { control } = useFormContext();
+  const adultFields = useFieldArray(
+    {
+      control,
+      name: "adults",
+    }
+  ).fields;
+  const childrenFields = useFieldArray(
+    {
+      control,
+      name: "children",
+    }
+  ).fields;
+  const infantFields = useFieldArray(
+    {
+      control,
+      name: "infants",
+    }
+  ).fields;
 
   const {
     origin,
@@ -19,7 +37,6 @@ const ReviewBooking = () => {
     taxes,
     sc,
     discount,
-    totalAmount,
     gender,
     firstName,
     surName,
@@ -30,160 +47,124 @@ const ReviewBooking = () => {
     ticket,
     issueBy,
     ledger,
+    adultFare,
+    childFare,
+    infantFare,
+    grandTotal,
     code,
   } = control._formValues;
+
+  const [totalAdultFare, setTotalAdultFare] = useState(
+    number_of_adults * adultFare
+  );
+  const [totalChildrenFare, setTotalChildrenFare] = useState(
+    number_of_children * childFare
+  );
+  const [totalInfantFare, setTotalInfantFare] = useState(
+    number_of_infants * infantFare
+  );
+  const [totalAmount, setTotalAmount] = useState(
+    totalAdultFare + totalInfantFare + totalChildrenFare
+  );
+
+  useEffect(() => {
+    setTotalAdultFare(number_of_adults * adultFare);
+    setTotalChildrenFare(number_of_children * childFare);
+    setTotalInfantFare(number_of_infants * infantFare);
+    setTotalAmount(totalAdultFare + totalInfantFare + totalChildrenFare);
+  }, [adultFare, childFare, control, infantFare, number_of_adults, number_of_children, number_of_infants, totalAdultFare, totalChildrenFare, totalInfantFare]);
+
   return (
     <>
       <React.Fragment>
-        <Typography variant='h6' align="center" gutterBottom>
+        <Typography variant="h6" align="center" gutterBottom>
           1 Booking Information Details
         </Typography>
-        <Typography variant='h6' align="center" gutterBottom>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <p>{origin}</p>
+          <p>{destination}</p>
+          <p>{journeyDate}</p>
+          <p>{returnDate}</p>
+          <p>{number_of_adults}</p>
+          <p>{number_of_children}</p>
+          <p>{number_of_infants}</p>
+        </div>
+
+        <Typography variant="h6" align="center" gutterBottom>
           2 Flight Information Details
         </Typography>
-        <Typography variant='h6' align="center" gutterBottom>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <p>{airline}</p>
+          <p>{code}</p>
+          <p>{cabin}</p>
+          <p>{totalAdultFare}</p>
+          <p>{totalChildrenFare}</p>
+          <p>{totalInfantFare}</p>
+          <p>{sc}</p>
+          <p>{taxes}</p>
+          <p>{discount}</p>
+        </div>
+        <Typography variant="h6" align="center" gutterBottom>
           3 Passenger Details
         </Typography>
-        <Typography variant='h6' align="center" gutterBottom>
-         4 Fares Details
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {adultFields.map((field, index) => (
+            <div className="" key={index}>
+              <p>{field.date_of_birth}</p>
+              <p>{field.firstName}</p>
+              <p>{field.email}</p>
+              <p>{field.phoneNumber}</p>
+              <p>{field.surName}</p>
+            </div>
+          ))}
+          {childrenFields.map((field, index) => (
+            <div className="" key={index}>
+              <p>{field.date_of_birth}</p>
+              <p>{field.firstName}</p>
+              <p>{field.email}</p>
+              <p>{field.phoneNumber}</p>
+              <p>{field.surName}</p>
+            </div>
+          ))}
+          {infantFields.map((field, index) => (
+            <div className="" key={index}>
+              <p>{field.date_of_birth}</p>
+              <p>{field.firstName}</p>
+              <p>{field.surName}</p>
+            </div>
+          ))}
+        </div>
+        <Typography variant="h6" align="center" gutterBottom>
+          4 Fares Details
         </Typography>
-     
-     
 
-        {Array.from({ length: number_of_adults }).map((_, index) => (
-          <div style={{ margin: 20 }}>
-            <TextField
-              {...register(`adults.${index}.surName`)}
-              label="Surname"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`adults.${index}.firstName`)}
-              label="First Name"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`adults.${index}.email`)}
-              label="Email"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`adults.${index}.phoneNumber`)}
-              label="Phone Number"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`adults.${index}.date_of_birth_of_adult`)}
-              label="Date of Birth"
-              variant="outlined"
-              fullWidth={true}
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-        ))}
-        <hr />
-        {Array.from({ length: number_of_children }).map((_, index) => (
-          <div style={{ margin: 20 }}>
-            <TextField
-              {...register(`children.${index}.surName`)}
-              label="Surname"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`children.${index}.firstName`)}
-              label="First Name"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`children.${index}.email`)}
-              label="Email"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`children.${index}.phoneNumber`)}
-              label="Phone Number"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`children.${index}.date_of_birth_of_children`)}
-              label="Date of Birth"
-              variant="outlined"
-              fullWidth={true}
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-        ))}
-        <hr />
-        {Array.from({ length: number_of_infants }).map((_, index) => (
-          <div style={{ margin: 20 }}>
-            <TextField
-              {...register(`infants.${index}.surName`)}
-              label="Surname"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`infants.${index}.firstName`)}
-              label="First Name"
-              variant="outlined"
-              fullWidth={true}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              {...register(`infants.${index}.date_of_birth_of_infant`)}
-              label="Date of Birth"
-              variant="outlined"
-              fullWidth={true}
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-        ))}
+        <p>Total Adult Fare: {isNaN(totalAdultFare) ? "" : totalAdultFare}</p>
+        <p>
+          Total Children Fare:{" "}
+          {isNaN(totalChildrenFare) ? "" : totalChildrenFare}
+        </p>
+        <p>
+          Total Infant Fare: {isNaN(totalInfantFare) ? "" : totalInfantFare}
+        </p>
+        <p>Grand Total:{isNaN(totalAmount) ? "" : totalAmount}</p>
       </React.Fragment>
     </>
   );
