@@ -14,7 +14,9 @@ export const formDefaultValues = {
 
   airline: "",
   cabin: "",
-  basicFare: "",
+  adult_fare:"",
+  children_fare:"",
+  infant_fare:"",
   taxes: "",
   sc: "",
   discount: "",

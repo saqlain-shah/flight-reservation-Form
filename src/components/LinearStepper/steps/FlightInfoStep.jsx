@@ -25,7 +25,7 @@ const FlightInfo = () => {
               )}
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <Controller
               control={control}
               name="code"
@@ -39,7 +39,7 @@ const FlightInfo = () => {
               )}
             />{" "}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Controller
               control={control}
               name="cabin"
@@ -53,13 +53,55 @@ const FlightInfo = () => {
               )}
             />{" "}
           </Grid>
+          <Grid item xs={4}>
+            <Controller
+              control={control}
+              name="Adult Fare"
+              render={({ field }) => (
+                <TextField
+                  label="Adult Fare"
+                  variant="outlined"
+                  fullWidth={true}
+                  {...field}
+                />
+              )}
+            />{" "}
+          </Grid>
+              <Grid item xs={4}>
+            <Controller
+              control={control}
+              name="Children Fare"
+              render={({ field }) => (
+                <TextField
+                  label="Children Fare"
+                  variant="outlined"
+                  fullWidth={true}
+                  {...field}
+                />
+              )}
+            />{" "}
+          </Grid>
+          <Grid item xs={4}>
+            <Controller
+              control={control}
+              name="Infant Fare"
+              render={({ field }) => (
+                <TextField
+                  label="Infant Fare"
+                  variant="outlined"
+                  fullWidth={true}
+                  {...field}
+                />
+              )}
+            />{" "}
+          </Grid>
           <Grid item xs={3}>
             <Controller
               control={control}
-              name="basicFare"
+              name="sc"
               render={({ field }) => (
                 <TextField
-                  label="Basic Fare"
+                  label="Sale Commission"
                   variant="outlined"
                   fullWidth={true}
                   {...field}
@@ -74,20 +116,6 @@ const FlightInfo = () => {
               render={({ field }) => (
                 <TextField
                   label="%Taxes"
-                  variant="outlined"
-                  fullWidth={true}
-                  {...field}
-                />
-              )}
-            />{" "}
-          </Grid>
-          <Grid item xs={3}>
-            <Controller
-              control={control}
-              name="sc"
-              render={({ field }) => (
-                <TextField
-                  label="Airline"
                   variant="outlined"
                   fullWidth={true}
                   {...field}
