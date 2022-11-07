@@ -18,7 +18,7 @@ function AdultPassengerDetailAccordion({ title, subtitle, register, index }) {
         }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon  />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
