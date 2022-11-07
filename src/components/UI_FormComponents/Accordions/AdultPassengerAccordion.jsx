@@ -9,7 +9,7 @@ import { Container, TextField } from "@material-ui/core";
 function AdultPassengerDetailAccordion({ title, subtitle, register, index }) {
   return (
     <div>
-      <Accordion style={{ backgroundColor: '#424242', margin: "10px 0px" }}>
+      <Accordion style={{ backgroundColor: '#424242', borderRadius: '5px', margin: "10px 0px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
