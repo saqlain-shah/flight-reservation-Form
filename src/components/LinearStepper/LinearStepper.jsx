@@ -11,6 +11,7 @@ import BookingInfo from "./steps/BookingInfo";
 import FlightInfo from "./steps/FlightInfo";
 import PassengerInfo from "./steps/PassengerInfo";
 import ReviewBooking from "./steps/ReviewBooking";
+import {TicketTemplate} from "../../View/TicketTemplate/TicketTemplate.jsx";
 import useStyles from "../../View/styles/FormWizardStyles";
 import { formDefaultValues } from "../utils/constants";
 import ConfirmBooking from "./steps/ConfirmBooking";
@@ -21,7 +22,8 @@ function getSteps() {
     "Flight Information",
     "Passenger Information",
     "Review Your Booking",
-    "Confirm Booking"
+    "Confirm Booking",
+    "Checkout"
   ];
 }
 
@@ -37,6 +39,8 @@ function getStepContent(step) {
       return <ReviewBooking />;
     case 4:
       return <ConfirmBooking />;
+    case 5:
+      return <TicketTemplate/>;
     default:
       return "unknown step";
   }

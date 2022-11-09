@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -18,7 +18,7 @@ function AdultPassengerDetailAccordion({ title, subtitle, register, index }) {
         }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon  />}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
