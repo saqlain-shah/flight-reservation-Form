@@ -11,10 +11,10 @@ import BookingInfo from "./steps/BookingInfo";
 import FlightInfo from "./steps/FlightInfo";
 import PassengerInfo from "./steps/PassengerInfo";
 import ReviewBooking from "./steps/ReviewBooking";
-import {TicketTemplate} from "../../View/TicketTemplate/TicketTemplate.jsx";
 import useStyles from "../../View/styles/FormWizardStyles";
 import { formDefaultValues } from "../utils/constants";
 import ConfirmBooking from "./steps/ConfirmBooking";
+import Checkout from "./steps/Checkout";
 
 function getSteps() {
   return [
@@ -23,7 +23,7 @@ function getSteps() {
     "Passenger Information",
     "Review Your Booking",
     "Confirm Booking",
-    "Checkout"
+    "Checkout",
   ];
 }
 
@@ -40,7 +40,7 @@ function getStepContent(step) {
     case 4:
       return <ConfirmBooking />;
     case 5:
-      return <TicketTemplate/>;
+      return <Checkout />;
     default:
       return "unknown step";
   }
@@ -49,9 +49,9 @@ function getStepContent(step) {
 const LinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
-    defaultValues: formDefaultValues
+    defaultValues: formDefaultValues,
   });
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(5);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
 
